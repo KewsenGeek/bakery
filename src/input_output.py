@@ -44,3 +44,5 @@ print(check_float("10"))    # Вывод: 10.0
 print(check_float("abc"))   # Вывод: 0
 print(check_float(10))      # Вывод: 10.0
 print(check_float([1,2,3])) # Вывод: 0
+
+print('типа я что-то добавил')
