@@ -2,6 +2,7 @@
 from db import Warehouse
 import time
 
+
 class Worker:
     def __init__(self, age, health, hunger, energy, money, happiness, warehouse: Warehouse):
         self.age = age
@@ -14,21 +15,24 @@ class Worker:
 
     def work(self):
         pass
+
     def chill(self):
         pass
+
 
 class Backer(Worker):
     def __init__(self, age, health, hunger, energy, money, happiness, warehouse: Warehouse):
         super().__init__(age, health, hunger, energy, money, happiness, warehouse)
-    def work(self, order = {'Круассан': 10, 'Розан': 15}):
+
+    def work(self, order={'Круассан': 10, 'Розан': 15}):
         """
         прием данных в формате {товар: кол-во}
         :param order:
         :return:
         """
         print('Печем')
-        self.warehouse.write_stuff(order)
         time.sleep(10)
+        self.warehouse.write_stuff(order)
         print('Все испечено!')
 
     def chill(self):
@@ -38,7 +42,23 @@ class Backer(Worker):
 class Master(Worker):
     def __init__(self, age, health, hunger, energy, money, happiness, warehouse: Warehouse):
         super().__init__(age, health, hunger, energy, money, happiness, warehouse)
+
     def work(self):
         print('Управление')
+
     def chill(self):
         print('Отдых')
+
+
+class Seller(Worker):
+
+    def __init__(self, age, health, hunger, energy, money, happiness, warehouse: Warehouse):
+        super().__init__(age, health, hunger, energy, money, happiness, warehouse)
+
+    def sell(self, stuff_to_sell):
+        """
+        Метод для продажи товара со склада. Если товара недостаточно, то нужно дать задание пекарю изготовить недостающие товары
+        :param stuff_to_sell: {товар: кол-во}
+        :return:
+        """
+
