@@ -29,14 +29,14 @@ class Warehouse:
         )
         self.connection.commit()
 
-    def get_staff(self):
+    def get_staff(self) -> list[dict[str, int]]:
         """
-        Возвращает список всех ингредиентов в формате [ингредиент: кол-во]
+        Возвращает список всех ингредиентов в формате {ингредиент: кол-во}
         :return: list[dict]
         """
         return [{i: j} for i, j in self.cursor.execute("SELECT * FROM Stuff").fetchall()]
 
-    def write_stuff(self, stuff: dict):
+    def write_stuff(self, stuff: dict[str, int]) -> None:
         """
         Записывает данные о товарах в базу данных
         Данные принимаются в формате {ингредиент: кол-во}
@@ -47,7 +47,7 @@ class Warehouse:
             self.cursor.execute('INSERT INTO Stuff (name, amount) VALUES (?, ?)', (i, stuff[i]))
         self.connection.commit()
 
-    def order_ingredients(self, ingredients: list[dict]):
+    def order_ingredients(self, ingredients: list[dict[str, int]]) -> None:
         """
         Метод заказа ингредиентов. Для заказа нужно передать нужные ингредиенты в формате
         [{ингредиент: кол-во}, {ингредиент: кол-во}, ...], кол-во в килограммах
@@ -60,10 +60,9 @@ class Warehouse:
         time.sleep(3)
         print('Ингредиенты заказаны')
 
-
-    def get_ingredients(self):
+    def get_ingredients(self) -> list[dict[str, int]]:
         """
-        Возвращает список всех ингредиентов в формате [ингредиент: кол-во]
+        Возвращает список всех ингредиентов в формате {ингредиент: кол-во}
         :return: list[dict]
         """
         return [{i: j} for i, j in self.cursor.execute("SELECT * FROM Ingredients").fetchall()]
