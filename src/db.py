@@ -8,10 +8,6 @@ class Warehouse:
 
     def __init__(self, db_name='warehouse.db'):
 
-        self.all_pastry = [
-            'Круассаны', 'Розаны', 'Печенье', 'Хлеб', 'Багет'
-        ]
-
         self.connection = sqlite3.connect(db_name)
         self.cursor = self.connection.cursor()
         self.cursor.execute(
