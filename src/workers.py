@@ -18,8 +18,7 @@ class Worker:
 
     # TODO: убери дублирующиеся функции из классов. Методы отдыха у троих работников совпадают,
     #  просто пропиши, что они делают при отдыхе, здесь. Либо убери вообще метод отдыха у всех
-    def chill(self):
-        pass
+    # Ответ: я удалю просто функцию отдыха
 
 
 class Baker(Worker):
@@ -39,8 +38,6 @@ class Baker(Worker):
         self.warehouse.write_stuff(order)
         print('Все испечено!')
 
-    def chill(self):
-        print('Отдых')
 
 
 # TODO: Здесь просто добавь функции заказа ингредиентов
@@ -51,8 +48,6 @@ class Master(Worker):
     def work(self):
         print('Управление')
 
-    def chill(self):
-        print('Отдых')
 
 
 class Seller(Worker):
