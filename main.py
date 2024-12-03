@@ -5,9 +5,6 @@ from src.db import Warehouse
 from src.input_output import render_menu
 
 
-# from src.input_output import render_menu
-
-
 def main():
 
     name = str(input('Введите ваше имя: '))
