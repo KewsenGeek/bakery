@@ -4,6 +4,8 @@
 # Названия классов принято называть с большой буквы, чтобы не было путаницы
 class Buyer:
 
+    # TODO: Аннотация типов производится через двоеточие, параметр sex - это пол покупателя,
+    #  это значение М или Ж
     def __init__(self, name=str, age=int, money=int, sex=bool, address=str):
         self.name = name
         self.age = age
