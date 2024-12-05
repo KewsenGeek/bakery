@@ -57,8 +57,9 @@ class Master(Worker):
 
 class Seller(Worker):
 
-    def __init__(self, age, health, hunger, energy, money, happiness, warehouse: Warehouse):
+    def __init__(self, age, health, hunger, energy, money, happiness, warehouse: Warehouse, baker: Baker):
         super().__init__(age, health, hunger, energy, money, happiness, warehouse)
+        self.baker = baker
 
     def sell(self, stuff_to_sell: dict):
         """
@@ -69,8 +70,7 @@ class Seller(Worker):
         all_stuff: dict = self.warehouse.get_stuff()
         for stuff in stuff_to_sell.keys():
             if stuff not in all_stuff.keys() or all_stuff[stuff] <= stuff_to_sell[stuff]:
-                # Я как-то получил доступ к Пекарю и присвоил его переменной baker
-                baker.work({stuff: stuff_to_sell[stuff] - all_stuff[stuff]})
+                self.baker.work({stuff: stuff_to_sell[stuff] - all_stuff[stuff]})
         
         # По идее, когда весь стафф уже есть, нам бы его продать и удалить из таблички, но в тз такого нету
 
