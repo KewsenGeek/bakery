@@ -29,7 +29,7 @@ class Warehouse:
         )
         self.connection.commit()
 
-    def get_staff(self) -> list[dict[str, int]]:
+    def get_stuff(self) -> list[dict[str, int]]:
         """
         Возвращает список всех ингредиентов в формате {ингредиент: кол-во}
         :return: list[dict]
@@ -56,9 +56,15 @@ class Warehouse:
         """
         for i in ingredients:
             for j in i.keys():
-                self.cursor.execute("INSERT INTO Ingredients (name, amount) VALUES (?, ?)", (j, i[j]))
-        time.sleep(3)
-        print('Ингредиенты заказаны')
+                self.cursor.execute("SELECT COUNT(*) FROM Ingredients WHERE name = ?", (j,))
+                exists = self.cursor.fetchone()[0] > 0
+                if exists:
+                    self.cursor.execute(
+                    "UPDATE Ingredients SET amount = ? WHERE name = ? AND amount < ?",
+                    (i[j], j, i[j])
+                    )
+                else:
+                    self.cursor.execute("INSERT INTO Ingredients (name, amount) VALUES (?, ?)", (j, i[j]))
 
     def get_ingredients(self) -> list[dict[str, int]]:
         """
