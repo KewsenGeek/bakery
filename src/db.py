@@ -83,7 +83,7 @@ def create_bakery_instance(**attributes):
 
 
 # Создание экземпляров класса Bakery
-if __name__ == "__main__":
+def predefined_bakery_examples():
     # Данные для создания экземпляров
     bakery_items_data = [
         {"name": "Булочка с картошкой", "тесто": 100, "картошка": 50},
@@ -91,6 +91,12 @@ if __name__ == "__main__":
         {"name": "Круассан", "тесто": 75},
         {"name": "пицца", "тесто": 150, "колбаса": 80,"помидоры":30},
     ]
-
+     bakery_items = []
+    for example in examples:
+        bakery_item = create_bakery_instance(**example)
+        bakery_items.append(bakery_item)
+    
+    return bakery_items
 # Создаем список экземпляров
-bakery_items = [create_bakery_instance(**data) for data in bakery_items_data]
+bakery_examples = predefined_bakery_examples()
+
