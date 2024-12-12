@@ -48,18 +48,31 @@ class Master(Worker):
     def work(self):
         print('Управление')
 
+    def order_ingredients(self, ingredients: list[dict[str, int]]):
+        self.warehouse.order_ingredients(ingredients)
+        time.sleep(3)
+        print('Ингредиенты заказаны')
+
 
 
 class Seller(Worker):
 
-    def __init__(self, age, health, hunger, energy, money, happiness, warehouse: Warehouse):
+    def __init__(self, age, health, hunger, energy, money, happiness, warehouse: Warehouse, baker: Baker):
         super().__init__(age, health, hunger, energy, money, happiness, warehouse)
+        self.baker = baker
 
-    def sell(self, stuff_to_sell):
+    def sell(self, stuff_to_sell: dict):
         """
         Метод для продажи товара со склада. Если товара недостаточно, то нужно дать задание пекарю изготовить недостающие товары
         :param stuff_to_sell: {товар: кол-во}
         :return:
         """
+        all_stuff: dict = self.warehouse.get_stuff()
+        for stuff in stuff_to_sell.keys():
+            if stuff not in all_stuff.keys() or all_stuff[stuff] <= stuff_to_sell[stuff]:
+                self.baker.work({stuff: stuff_to_sell[stuff] - all_stuff[stuff]})
+        
+        # По идее, когда весь стафф уже есть, нам бы его продать и удалить из таблички, но в тз такого нету
+
         pass
 
