@@ -29,10 +29,7 @@ class Warehouse:
         )
         self.connection.commit()
         
-class Bakery:
-    def __init__(self, **kwargs):
-        for key, value in kwargs.items():
-            setattr(self, key, value)
+
 
 # Функция для создания экземпляра класса Bakery
 def create_bakery_instance(**attributes):
@@ -79,24 +76,9 @@ def create_bakery_instance(**attributes):
         """
         return [{i: j} for i, j in self.cursor.execute("SELECT * FROM Ingredients").fetchall()]
 
-
-
-
-# Создание экземпляров класса Bakery
-def predefined_bakery_examples():
-    # Данные для создания экземпляров
-    bakery_items_data = [
+bakerys = [
         {"name": "Булочка с картошкой", "тесто": 100, "картошка": 50},
         {"name": "сосиска в тесте", "тесто": 100, "сосиска": 45},
         {"name": "Круассан", "тесто": 75},
         {"name": "пицца", "тесто": 150, "колбаса": 80,"помидоры":30},
     ]
-     bakery_items = []
-    for example in examples:
-        bakery_item = create_bakery_instance(**example)
-        bakery_items.append(bakery_item)
-    
-    return bakery_items
-# Создаем список экземпляров
-bakery_examples = predefined_bakery_examples()
-
