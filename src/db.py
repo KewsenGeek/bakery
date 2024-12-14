@@ -29,14 +29,7 @@ class Warehouse:
         )
         self.connection.commit()
         
-class Bakery:
-    def __init__(self, **kwargs):
-        for key, value in kwargs.items():
-            setattr(self, key, value)
 
-# Функция для создания экземпляра класса Bakery
-def create_bakery_instance(**attributes):
-    return Bakery(**attributes)
 
 
 
@@ -79,7 +72,14 @@ def create_bakery_instance(**attributes):
         """
         return [{i: j} for i, j in self.cursor.execute("SELECT * FROM Ingredients").fetchall()]
 
+class Bakery:
+    def __init__(self, **kwargs):
+        for key, value in kwargs.items():
+            setattr(self, key, value)
 
+# Функция для создания экземпляра класса Bakery
+def create_bakery_instance(**attributes):
+    return Bakery(**attributes)
 
 
 # Создание экземпляров класса Bakery
